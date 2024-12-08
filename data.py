@@ -6,8 +6,8 @@ class Data:
             self.text = f.read()
         self.chars = sorted(list(set(self.text)))
         self.vocab_size = len(self.chars)
-        self.stoi = {ch: i for i, ch in enumerate(self.chars)}  # char to index
-        self.itos = {i: ch for i, ch in enumerate(self.chars)}  # index to char
+        self.stoi = {ch: i for i, ch in enumerate(self.chars)} 
+        self.itos = {i: ch for i, ch in enumerate(self.chars)} 
 
     def encode(self, s):
         """Converts a string to a list of integers."""
