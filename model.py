@@ -41,13 +41,14 @@ class GPTLanguageModel(nn.Module):
         self.ln_f = nn.LayerNorm(n_embd)
         self.head = nn.Linear(n_embd, vocab_size)
 
-    def forward(self, x):
-        x = self.token_embeddings(x)
-        for block in self.blocks:
-            x = block(x)
-        x = self.ln_f(x)
-        logits = self.head(x)
-        return logits
+def forward(self, x):
+    x = self.token_embeddings(x)
+    for block in self.blocks:
+        x = block(x)
+    x = self.ln_f(x)
+    logits = self.head(x)
+    
+    return logits
 
     def generate(self, context, max_new_tokens):
         for _ in range(max_new_tokens):
