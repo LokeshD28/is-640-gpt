@@ -9,4 +9,8 @@ class Data:
         self.stoi = {ch: i for i, ch in enumerate(each_char)} 
         self.itos = {i: ch for i, ch in enumerate(each_char)}
     
+    def encode(self, s):
+        return [self.stoi[c] for c in s]
+
+    
 
