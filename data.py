@@ -14,6 +14,9 @@ class Data:
     
     def decode(self, l):
         return ''.join([self.itos[i] for i in l])
+    
+    def get_data(self):
+        return torch.tensor(self.encode(self.text), dtype=torch.long)
 
 
     
