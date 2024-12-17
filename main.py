@@ -7,7 +7,7 @@ from model import GPTLanguageModel
 RANDOM_SEED = 1337
 TRAIN_ITERATIONS = 100
 WORD_COUNT = 100
-
+DATA_FILE = "input.txt"
 
 def main():
     torch.manual_seed(RANDOM_SEED)
