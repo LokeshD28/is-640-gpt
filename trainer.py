@@ -60,6 +60,17 @@ class Trainer() :
                 losses = self.__estimate_loss()
                 print(f"step {iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
 
+            xb, yb = self.__get_batch('train')
+
+
+            logits, loss = self.model(xb, yb)
+            self.optimizer.zero_grad(set_to_none=True)
+            loss.backward()
+            self.optimizer.step()
+
+        
+       return  torch.zeros((1, 1), dtype=torch.long, device=device)
+
             
 
 
