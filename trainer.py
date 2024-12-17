@@ -63,14 +63,12 @@ class Trainer() :
             
             xb, yb = self.__get_batch('train')
 
-            
 
-
-        
-       return  torch.zeros((1, 1), dtype=torch.long, device=device)
-
-         
             logits, loss = self.model(xb, yb)
             self.optimizer.zero_grad(set_to_none=True)
             loss.backward()
             self.optimizer.step()
+
+        
+       return  torch.zeros((1, 1), dtype=torch.long, device=device)
+
