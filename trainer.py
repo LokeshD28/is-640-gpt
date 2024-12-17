@@ -50,6 +50,13 @@ class Trainer() :
             self.model.train()
             return out
 
+    
+    def print_learning_rate(self):
+        # Access the current learning rate from the optimizer
+        for param_group in self.optimizer.param_groups:
+            current_lr = param_group['lr']
+            print(f"Current learning rate: {current_lr}")
+            
     def train(self,train_iterations) :
  
         self.__init_train_val_data()
@@ -57,6 +64,7 @@ class Trainer() :
 
             
             if iter % EVAL_INTERVAL == 0:
+                self.print_learning_rate()
                 losses = self.__estimate_loss()
                 print(f"step {iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
 
