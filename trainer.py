@@ -26,4 +26,41 @@ class Trainer() :
             self. val_data = self.data[n:]
 
     # data loading
+    def __get_batch(self,split):
+        # generate a small batch of data of inputs x and targets y
+        data = self.train_data if split == 'train' else self.val_data
+        ix = torch.randint(len(data) - BLOCK_SIZE, (BATCH_SIZE,))
+        x = torch.stack([data[i:i+BLOCK_SIZE] for i in ix])
+        y = torch.stack([data[i+1:i+BLOCK_SIZE+1] for i in ix])
+        x, y = x.to(device), y.to(device)
+        return x, y
+
+    #This is a PyTorch decorator that disables gradient tracking during the execution of the method it decorates.
+    @torch.no_grad()
+    def __estimate_loss(self,):
+            out = {}
+            self.model.eval()
+            for split in ['train', 'val']:
+                losses = torch.zeros(EVAL_ITERS)
+                for k in range(EVAL_ITERS):
+                    X, Y = self.__get_batch(split)
+                    logits, loss = self.model(X, Y)
+                    losses[k] = loss.item()
+                out[split] = losses.mean()
+            self.model.train()
+            return out
+
+    def train(self,train_iterations) :
+ 
+        self.__init_train_val_data()
+        for iter in range(train_iterations):
+
+            
+            if iter % EVAL_INTERVAL == 0:
+                losses = self.__estimate_loss()
+                print(f"step {iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
+
+            
+
+
     
