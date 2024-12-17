@@ -55,20 +55,22 @@ class Trainer() :
         self.__init_train_val_data()
         for iter in range(train_iterations):
 
-            # every once in a while evaluate the loss on train and val sets
+            
             if iter % EVAL_INTERVAL == 0:
                 losses = self.__estimate_loss()
                 print(f"step {iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
 
-            # sample a batch of data
+            
             xb, yb = self.__get_batch('train')
 
-            # evaluate the loss
+            
+
+
+        
+       return  torch.zeros((1, 1), dtype=torch.long, device=device)
+
+         
             logits, loss = self.model(xb, yb)
             self.optimizer.zero_grad(set_to_none=True)
             loss.backward()
             self.optimizer.step()
-
-        # generate from the model
-        return  torch.zeros((1, 1), dtype=torch.long, device=device)
-
