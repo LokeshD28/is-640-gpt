@@ -14,7 +14,7 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 dropout = 0.2
 
 
-
+class Head(nn.Module):
 
     def __init__(self, head_size):
         super().__init__()
