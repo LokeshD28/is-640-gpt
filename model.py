@@ -3,7 +3,7 @@ import torch.nn as nn
 from torch.nn import functional as F
 
 
-BATCH_SIZE = 32  
+BATCH_SIZE = 16  
 BLOCK_SIZE = 8 
 EVAL_INTERVAL = 10
 EVAL_ITERS = 200
